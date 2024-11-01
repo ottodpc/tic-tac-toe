@@ -24,7 +24,7 @@ void playerMove(char board[3][3], char player) {
     do {
         printf("Joueur %c, entrez la ligne et la colonne (1-3): ", player);
         scanf("%d %d", &row, &col);
-        row--; col--; // Conversion en index 0
+        row--; col--; 
     } while (row < 0 || row >= 3 || col < 0 || col >= 3 || board[row][col] != ' ');
     board[row][col] = player;
 }
@@ -46,5 +46,29 @@ int checkWin(char board[3][3]) {
             if (board[i][j] == ' ')
                 return -1;
     
-    return 0; // Égalité
+    return 0; 
+}
+
+int main() {
+    char board[3][3];
+    char currentPlayer = 'X';
+    int gameState;
+
+    initBoard(board);
+
+    do {
+        printBoard(board);
+        playerMove(board, currentPlayer);
+        gameState = checkWin(board);
+        currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
+    } while (gameState == -1);
+
+    printBoard(board);
+
+    if (gameState == 1)
+        printf("Le joueur %c a gagné !\n", (currentPlayer == 'X') ? 'O' : 'X');
+    else
+        printf("Égalité !\n");
+
+    return 0;
 }
