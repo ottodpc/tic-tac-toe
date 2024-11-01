@@ -18,3 +18,13 @@ void printBoard(char board[3][3]) {
     }
     printf("\n");
 }
+
+void playerMove(char board[3][3], char player) {
+    int row, col;
+    do {
+        printf("Joueur %c, entrez la ligne et la colonne (1-3): ", player);
+        scanf("%d %d", &row, &col);
+        row--; col--; // Conversion en index 0
+    } while (row < 0 || row >= 3 || col < 0 || col >= 3 || board[row][col] != ' ');
+    board[row][col] = player;
+}
